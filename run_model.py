@@ -111,13 +111,20 @@ ensure_dir(PATH + "entanglement/")
 ensure_dir(PATH + "logs/")
 ensure_dir(PATH + "mps/")
 
+if BC_MPS == 'finite':
+    R = L-1
+    xi = 0.
+else:
+    R = L
+    xi = psi.correlation_length()
+
 # measuring exciton condensation
 hs = []
-for i in range(0,L): 
+for i in range(0,R): 
     hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
 
 file1 = open( PATH + "observables/energy.txt","a")
-file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(hs) ) + " " + repr(psi.correlation_length()) + " " + "\n")
+file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + "\n")
 
 file2 = open( PATH + "observables/numbers.txt","a")
 file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
