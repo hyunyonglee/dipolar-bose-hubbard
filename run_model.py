@@ -123,19 +123,19 @@ file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, 
 file3 = open( PATH + "observables/exciton_density.txt","a")
 file3.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, hs)) + " " + "\n")
 
-file_ES = open( PATH + "entanglement/es_t_%.2ff_U_%.2ff_mu_%.2ff.txt" % (t,U,mu),"a")
+file_ES = open( PATH + "entanglement/es_t_%.2f_U_%.2f_mu_%.2f.txt" % (t,U,mu),"a")
 for i in range(0,L):
     file_ES.write("  ".join(map(str, ES[i])) + " " + "\n")
-file_EE = open( PATH + "entanglement/ee_t_%.2ff_U_%.2ff_mu_%.2ff.txt" % (t,U,mu),"a")
+file_EE = open( PATH + "entanglement/ee_t_%.2f_U_%.2f_mu_%.2f.txt" % (t,U,mu),"a")
 file_EE.write("  ".join(map(str, EE)) + " " + "\n")
 
-file_STAT = open( PATH + "logs/stat_t_%.2ff_U_%.2ff_mu_%.2ff.txt" % (t,U,mu),"a")
+file_STAT = open( PATH + "logs/stat_t_%.2f_U_%.2f_mu_%.2f.txt" % (t,U,mu),"a")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['E'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['S'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['max_trunc_err'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['norm_err'])) + " " + "\n")
 
-with open( PATH + 'mps/psi_t_%.2ff_U%.2ff_mu%.2ff.pkl' % (t,U,mu), 'wb') as f:
+with open( PATH + 'mps/psi_t_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
     pickle.dump(psi, f)
 
 
