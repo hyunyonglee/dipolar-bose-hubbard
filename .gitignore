@@ -1,0 +1,29 @@
+# Data folder
+DATAs/
+DATAs_CEDAR/
+Analysis/
+entanglement/
+logs/
+mps/
+observables/
+
+# Dependency directories
+__pycache__/
+
+# text files
+*.txt
+
+# pkl files
+*.pkl
+
+# log files
+log
+*log
+
+# test files
+test_*
+
+# Garbage
+.DS_Store
+
+dist*
