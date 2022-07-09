@@ -110,24 +110,24 @@ ensure_dir(PATH + "logs/")
 ensure_dir(PATH + "mps/")
 
 file1 = open( PATH + "observables/energy.txt","a")
-file1.write(repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr(psi.correlation_length()) + " " + "\n")
+file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr(psi.correlation_length()) + " " + "\n")
 
 file2 = open( PATH + "observables/numbers.txt","a")
-file2.write(repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
+file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
 
-file_ES = open( PATH + "entanglement/es_U%.2f_mu%.2f.txt" % (U,mu),"a")
+file_ES = open( PATH + "entanglement/es_t_%.1f_U_%.1f_mu_%.1f.txt" % (t,U,mu),"a")
 for i in range(0,L):
     file_ES.write("  ".join(map(str, ES[i])) + " " + "\n")
-file_EE = open( PATH + "entanglement/ee_U%.2f_mu%.2f.txt" % (U,mu),"a")
+file_EE = open( PATH + "entanglement/ee_t_%.1f_U_%.1f_mu_%.1f.txt" % (t,U,mu),"a")
 file_EE.write("  ".join(map(str, EE)) + " " + "\n")
 
-file_STAT = open( PATH + "logs/stat_U%.2f_mu%.2f.txt" % (U,mu),"a")
+file_STAT = open( PATH + "logs/stat_t_%.1f_U_%.1f_mu_%.1f.txt" % (t,U,mu),"a")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['E'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['S'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['max_trunc_err'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['norm_err'])) + " " + "\n")
 
-with open( PATH + 'mps/psi_U%.2f_mu%.2f.pkl' %  (U,mu), 'wb') as f:
+with open( PATH + 'mps/psi_t_%.1f_U%.1f_mu%.1f.pkl' % (t,U,mu), 'wb') as f:
     pickle.dump(psi, f)
 
 
