@@ -46,8 +46,8 @@ CHI = int(sys.argv[6])
 RM = sys.argv[7]
 QN = sys.argv[8]
 PATH = sys.argv[9]
-BC_MPS = "infinite"
-BC = "periodic" # "open"
+BC_MPS = sys.argv[10]
+BC = sys.argv[11]
 
 model_params = {
     "L": L,

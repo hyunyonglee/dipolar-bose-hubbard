@@ -41,7 +41,7 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
         # hubbard
         self.add_onsite( U/2., 0, 'NN')
 
-        # chemical
+        # chemical potential
         self.add_onsite( -( mu + U/2. ), 0, 'N')
 
         
