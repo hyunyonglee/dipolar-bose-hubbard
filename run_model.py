@@ -118,7 +118,7 @@ file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, 
 # measuring exciton condensation
 hs = []
 for i in range(0,L): 
-    hs.append( psi.expectation_value_term([('Bd',i+1),('B',i)]) )
+    hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
 
 file3 = open( PATH + "observables/exciton_density.txt","a")
 file3.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, hs)) + " " + "\n")
