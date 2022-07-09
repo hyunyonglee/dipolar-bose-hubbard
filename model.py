@@ -28,7 +28,6 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
         site = BosonSite( Nmax=Ncut, conserve='N', filling=0.0 )
         site.multiply_operators(['B','B'])
         site.multiply_operators(['Bd','Bd'])
-        site.multiply_operators(['Bd','Bd'])
 
         lat = Chain( L=L, site=site, bc=bc, bc_MPS=bc_MPS)
         

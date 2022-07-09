@@ -115,6 +115,14 @@ file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + rep
 file2 = open( PATH + "observables/numbers.txt","a")
 file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
 
+# measuring exciton condensation
+hs = []
+for i in range(0,L): 
+    hs.append( psi.expectation_value_term([('Bd',i+1),('B',i)]) )
+
+file3 = open( PATH + "observables/exciton_density.txt","a")
+file3.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, hs)) + " " + "\n")
+
 file_ES = open( PATH + "entanglement/es_t_%.1f_U_%.1f_mu_%.1f.txt" % (t,U,mu),"a")
 for i in range(0,L):
     file_ES.write("  ".join(map(str, ES[i])) + " " + "\n")
