@@ -93,7 +93,7 @@ dmrg_params = {
     'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-6,
-    'max_sweeps': 200
+    'max_sweeps': 500
 }
 
 
