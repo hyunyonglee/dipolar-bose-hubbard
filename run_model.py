@@ -109,16 +109,16 @@ ensure_dir(PATH + "entanglement/")
 ensure_dir(PATH + "logs/")
 ensure_dir(PATH + "mps/")
 
-file1 = open( PATH + "observables/energy.txt","a")
-file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr(psi.correlation_length()) + " " + "\n")
-
-file2 = open( PATH + "observables/numbers.txt","a")
-file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
-
 # measuring exciton condensation
 hs = []
 for i in range(0,L): 
     hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
+
+file1 = open( PATH + "observables/energy.txt","a")
+file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(hs) ) + " " + repr(psi.correlation_length()) + " " + "\n")
+
+file2 = open( PATH + "observables/numbers.txt","a")
+file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
 
 file3 = open( PATH + "observables/exciton_density.txt","a")
 file3.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, hs)) + " " + "\n")
