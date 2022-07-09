@@ -24,8 +24,9 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
         Ncut = model_params.get('Ncut', 2)
         bc_MPS = model_params.get('bc_MPS', 'infinite')
         bc = model_params.get('bc', 'periodic')
+        QN = model_params.get('QN', 'N')
 
-        site = BosonSite( Nmax=Ncut, conserve='N', filling=0.0 )
+        site = BosonSite( Nmax=Ncut, conserve=QN, filling=0.0 )
         site.multiply_operators(['B','B'])
         site.multiply_operators(['Bd','Bd'])
 

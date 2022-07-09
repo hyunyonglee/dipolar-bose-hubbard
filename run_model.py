@@ -44,7 +44,8 @@ mu = float(sys.argv[4])
 Ncut = int(sys.argv[5])
 CHI = int(sys.argv[6])
 RM = sys.argv[7]
-PATH = sys.argv[8]
+QN = sys.argv[8]
+PATH = sys.argv[9]
 BC_MPS = "infinite"
 BC = "periodic" # "open"
 
@@ -55,7 +56,8 @@ model_params = {
     "mu": mu,
     "Ncut": Ncut,
     "bc_MPS": BC_MPS,
-    "bc": BC
+    "bc": BC,
+    "QN": QN
 }
 
 print("\n\n\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
