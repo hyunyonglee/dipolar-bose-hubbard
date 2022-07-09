@@ -124,7 +124,7 @@ for i in range(0,R):
     hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
 
 file1 = open( PATH + "observables/energy.txt","a")
-file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + "\n")
+file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + "\n")
 
 file2 = open( PATH + "observables/numbers.txt","a")
 file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
