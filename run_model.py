@@ -101,6 +101,22 @@ dmrg_params = {
 # ground state
 eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
 E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
+
+N = psi.expectation_value("N")
+EE = psi.entanglement_entropy()
+ES = psi.entanglement_spectrum()
+
+if BC_MPS == 'finite':
+    R = L-1
+    xi = 0.
+else:
+    R = L
+    xi = psi.correlation_length()
+
+# measuring exciton condensation
+hs = []
+for i in range(0,R): 
+    hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
 #
 
 # excited state
@@ -126,26 +142,10 @@ else:
 #
 gap = E1 - E
 
-N = psi.expectation_value("N")
-EE = psi.entanglement_entropy()
-ES = psi.entanglement_spectrum()
-
 ensure_dir(PATH + "observables/")
 ensure_dir(PATH + "entanglement/")
 ensure_dir(PATH + "logs/")
 ensure_dir(PATH + "mps/")
-
-if BC_MPS == 'finite':
-    R = L-1
-    xi = 0.
-else:
-    R = L
-    xi = psi.correlation_length()
-
-# measuring exciton condensation
-hs = []
-for i in range(0,R): 
-    hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
 
 file1 = open( PATH + "observables/energy.txt","a")
 file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + repr(gap) + " " + "\n")
