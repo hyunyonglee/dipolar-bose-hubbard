@@ -72,10 +72,10 @@ if RM == 'random':
     eng.run()
     psi.canonical_form() 
 
-dchi = int(CHI/2)
-chi_list = {}
-for i in range(2):
-    chi_list[i*10] = (i+1)*dchi
+# dchi = int(CHI/2)
+# chi_list = {}
+# for i in range(2):
+#     chi_list[i*10] = (i+1)*dchi
 
 dmrg_params = {
     'mixer': True,  # setting this to True helps to escape local minima
@@ -92,7 +92,7 @@ dmrg_params = {
             'N_min': 5,
             'N_max': 20
     },
-    'chi_list': chi_list,
+    # 'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-5,
     'max_sweeps': 500
@@ -105,7 +105,7 @@ E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
 
 # excited state
 dmrg_params['orthogonal_to'] = [psi]
-psi1 = MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS) # psi.copy() 
+psi1 = psi.copy()  # MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
 eng1 = dmrg.TwoSiteDMRGEngine(psi1, M, dmrg_params)
 E1, psi1 = eng1.run()  # equivalent to dmrg.run() up to the return parameters.
 gap = E1 - E
