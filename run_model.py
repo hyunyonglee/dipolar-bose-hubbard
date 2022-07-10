@@ -94,13 +94,22 @@ dmrg_params = {
     },
     'chi_list': chi_list,
     'max_E_err': 1.0e-8,
-    'max_S_err': 1.0e-6,
+    'max_S_err': 1.0e-5,
     'max_sweeps': 500
 }
 
-
+# ground state
 eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
 E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
+#
+
+# excited state
+dmrg_params['orthogonal_to'] = [psi]
+psi1 = MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS) # psi.copy() 
+eng1 = dmrg.TwoSiteDMRGEngine(psi1, M, dmrg_params)
+E1, psi1 = eng1.run()  # equivalent to dmrg.run() up to the return parameters.
+gap = E1 - E
+#
 
 N = psi.expectation_value("N")
 EE = psi.entanglement_entropy()
@@ -124,7 +133,7 @@ for i in range(0,R):
     hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
 
 file1 = open( PATH + "observables/energy.txt","a")
-file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + "\n")
+file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + repr(gap) + " " + "\n")
 
 file2 = open( PATH + "observables/numbers.txt","a")
 file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
@@ -144,8 +153,11 @@ file_STAT.write("  ".join(map(str,eng.sweep_stats['S'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['max_trunc_err'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['norm_err'])) + " " + "\n")
 
-with open( PATH + 'mps/psi_t_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
+with open( PATH + 'mps/gs_t_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
     pickle.dump(psi, f)
+
+with open( PATH + 'mps/exs_t_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
+    pickle.dump(psi1, f)
 
 
 print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n\n")
