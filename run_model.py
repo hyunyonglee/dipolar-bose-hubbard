@@ -104,7 +104,7 @@ E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
 #
 
 # excited state
-if BC_MPS = 'finite':
+if BC_MPS == 'finite':
     dmrg_params['orthogonal_to'] = [psi]
     psi1 = psi.copy()  # MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
     eng1 = dmrg.TwoSiteDMRGEngine(psi1, M, dmrg_params)
