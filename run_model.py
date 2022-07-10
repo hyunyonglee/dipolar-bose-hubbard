@@ -104,12 +104,27 @@ E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
 #
 
 # excited state
-dmrg_params['orthogonal_to'] = [psi]
-psi1 = psi.copy()  # MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
-eng1 = dmrg.TwoSiteDMRGEngine(psi1, M, dmrg_params)
-E1, psi1 = eng1.run()  # equivalent to dmrg.run() up to the return parameters.
-gap = E1 - E
+if BC_MPS = 'finite':
+    dmrg_params['orthogonal_to'] = [psi]
+    psi1 = psi.copy()  # MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
+    eng1 = dmrg.TwoSiteDMRGEngine(psi1, M, dmrg_params)
+    E1, psi1 = eng1.run()  # equivalent to dmrg.run() up to the return parameters.
+else:
+    resume_psi = eng.get_resume_data(sequential_simulations=True)
+    M1 = M.extract_segment(enlarge=10)
+    first, last = M1.lat.segment_first_last
+    
+    psi_s = psi.extract_segment(first, last)
+    init_env_data = eng.env.get_initialization_data(first, last)
+
+    psi1 = psi_s.copy()  # TODO: perturb this a little bit
+    resume_psi1 = {'init_env_data': init_env_data}
+
+    eng1 = dmrg.TwoSiteDMRGEngine(psi1, M1, dmrg_params, resume_data=resume_psi1)
+    E1, psi1 = eng1.run()
+
 #
+gap = E1 - E
 
 N = psi.expectation_value("N")
 EE = psi.entanglement_entropy()
