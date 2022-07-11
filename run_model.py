@@ -98,6 +98,11 @@ dmrg_params = {
     'max_sweeps': 500
 }
 
+ensure_dir(PATH + "observables/")
+ensure_dir(PATH + "entanglement/")
+ensure_dir(PATH + "logs/")
+ensure_dir(PATH + "mps/")
+
 # ground state
 eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
 E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
@@ -146,11 +151,6 @@ else:
 
 #
 gap = E1 - E
-
-ensure_dir(PATH + "observables/")
-ensure_dir(PATH + "entanglement/")
-ensure_dir(PATH + "logs/")
-ensure_dir(PATH + "mps/")
 
 file1 = open( PATH + "observables/energy.txt","a")
 file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + repr(gap) + " " + "\n")
