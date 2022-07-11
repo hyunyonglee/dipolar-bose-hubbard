@@ -73,7 +73,7 @@ if RM == 'random':
     psi.canonical_form() 
 
 # dchi = int(CHI/2)
-chi_list = {10: 32, 20: 64, 30: CHI}
+# chi_list = {10: 32, 20: 64, 30: CHI}
 # for i in range(2):
     # chi_list[i*10] = (i+1)*dchi
 
@@ -92,7 +92,7 @@ dmrg_params = {
             'N_min': 5,
             'N_max': 20
     },
-    'chi_list': chi_list,
+    # 'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-4,
     'max_sweeps': 500
