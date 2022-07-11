@@ -72,10 +72,10 @@ if RM == 'random':
     eng.run()
     psi.canonical_form() 
 
-# dchi = int(CHI/2)
-# chi_list = {}
-# for i in range(2):
-#     chi_list[i*10] = (i+1)*dchi
+dchi = int(CHI/2)
+chi_list = {}
+for i in range(2):
+    chi_list[i*10] = (i+1)*dchi
 
 dmrg_params = {
     'mixer': True,  # setting this to True helps to escape local minima
@@ -92,7 +92,7 @@ dmrg_params = {
             'N_min': 5,
             'N_max': 20
     },
-    # 'chi_list': chi_list,
+    'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-5,
     'max_sweeps': 500
@@ -125,6 +125,10 @@ if BC_MPS == 'finite':
     psi1 = psi.copy()  # MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
     eng1 = dmrg.TwoSiteDMRGEngine(psi1, M, dmrg_params)
     E1, psi1 = eng1.run()  # equivalent to dmrg.run() up to the return parameters.
+
+    with open( PATH + 'mps/exs_t_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
+    	pickle.dump(psi1, f)
+
 else:
     # resume_psi = eng.get_resume_data(sequential_simulations=True)
     # M1 = M.extract_segment(enlarge=10)
@@ -172,8 +176,6 @@ file_STAT.write("  ".join(map(str,eng.sweep_stats['norm_err'])) + " " + "\n")
 with open( PATH + 'mps/gs_t_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
     pickle.dump(psi, f)
 
-with open( PATH + 'mps/exs_t_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
-    pickle.dump(psi1, f)
 
 
 print("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n\n\n")
