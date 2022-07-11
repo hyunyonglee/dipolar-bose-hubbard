@@ -72,10 +72,10 @@ if RM == 'random':
     eng.run()
     psi.canonical_form() 
 
-dchi = int(CHI/2)
-chi_list = {}
-for i in range(2):
-    chi_list[i*10] = (i+1)*dchi
+# dchi = int(CHI/2)
+chi_list = {64, 128, CHI}
+# for i in range(2):
+    # chi_list[i*10] = (i+1)*dchi
 
 dmrg_params = {
     'mixer': True,  # setting this to True helps to escape local minima
