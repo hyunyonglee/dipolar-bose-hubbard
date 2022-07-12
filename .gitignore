@@ -1,6 +1,7 @@
 # Data folder
 DATAs/
 DATAs_CEDAR/
+DATAs_OHTAKA/
 Analysis/
 entanglement/
 logs/
@@ -25,5 +26,8 @@ test_*
 
 # Garbage
 .DS_Store
+
+#.sh
+*.sh
 
 dist*

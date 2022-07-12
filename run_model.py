@@ -48,6 +48,7 @@ QN = sys.argv[8]
 PATH = sys.argv[9]
 BC_MPS = sys.argv[10]
 BC = sys.argv[11]
+IS = sys.argv[12]
 
 model_params = {
     "L": L,
@@ -63,7 +64,7 @@ model_params = {
 print("\n\n\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 M = model.DIPOLAR_BOSE_HUBBARD(model_params)
 
-product_state = ["1"] * M.lat.N_sites
+product_state = [IS] * M.lat.N_sites
 psi = MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
 
 if RM == 'random':
