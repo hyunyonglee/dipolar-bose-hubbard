@@ -111,7 +111,7 @@ eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
 E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
 
 N = psi.expectation_value("N")
-B = psi.expectation_value("B")
+B = np.abs( psi.expectation_value("B") )
 EE = psi.entanglement_entropy()
 ES = psi.entanglement_spectrum()
 
