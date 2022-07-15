@@ -174,7 +174,7 @@ for i in range(0,R):
 file_EE = open( PATH + "entanglement/ee_t_%.2f_tp_%.2f_U_%.2f_mu_%.2f.txt" % (t,tp,U,mu),"a")
 file_EE.write("  ".join(map(str, EE)) + " " + "\n")
 
- file_STAT = open( PATH + "logs/stat_t_%.2f_tp_%.2f_U_%.2f_mu_%.2f.txt" % (t,tp,U,mu),"a")
+file_STAT = open( PATH + "logs/stat_t_%.2f_tp_%.2f_U_%.2f_mu_%.2f.txt" % (t,tp,U,mu),"a")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['E'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['S'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['max_trunc_err'])) + " " + "\n")
