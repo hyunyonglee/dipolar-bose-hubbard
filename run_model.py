@@ -83,14 +83,14 @@ if RM == 'random':
 if BC_MPS == 'finite':
     max_sweep = 1000
 else:
-    max_sweep = 50
+    masx_sweep = 50
 
 dmrg_params = {
     'mixer': True,  # setting this to True helps to escape local minima
     'mixer_params': {
         'amplitude': 1.e-5,
         'decay': 1.2,
-        'disable_after': 30
+        'disable_after': 100
     },
     'trunc_params': {
         'chi_max': CHI,
@@ -104,7 +104,7 @@ dmrg_params = {
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-6,
     'max_sweeps': max_sweep,
-    'norm_tol' : 1.0-4
+    'norm_tol' : 1.0e-4
 }
 
 ensure_dir(PATH + "observables/")
