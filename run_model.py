@@ -80,17 +80,17 @@ if RM == 'random':
 # for i in range(2):
     # chi_list[i*10] = (i+1)*dchi
 
-if BC_MPS == 'finite':
+if BC_MPS == 'infinite':
     max_sweep = 1000
 else:
-    masx_sweep = 50
+    max_sweep = 50
 
 dmrg_params = {
     'mixer': True,  # setting this to True helps to escape local minima
     'mixer_params': {
         'amplitude': 1.e-5,
         'decay': 1.2,
-        'disable_after': 100
+        'disable_after': 150
     },
     'trunc_params': {
         'chi_max': CHI,
