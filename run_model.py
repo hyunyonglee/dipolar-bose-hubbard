@@ -80,12 +80,17 @@ if RM == 'random':
 # for i in range(2):
     # chi_list[i*10] = (i+1)*dchi
 
+if BC_MPS == 'finite':
+    max_sweep = 1000
+else:
+    max_sweep = 50
+
 dmrg_params = {
     'mixer': True,  # setting this to True helps to escape local minima
     'mixer_params': {
-        'amplitude': 1.e-3,
+        'amplitude': 1.e-5,
         'decay': 1.2,
-        'disable_after': 20
+        'disable_after': 30
     },
     'trunc_params': {
         'chi_max': CHI,
@@ -98,7 +103,7 @@ dmrg_params = {
     # 'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-6,
-    'max_sweeps': 500
+    'max_sweeps': max_sweep
 }
 
 ensure_dir(PATH + "observables/")
