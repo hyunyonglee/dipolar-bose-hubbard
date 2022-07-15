@@ -104,6 +104,7 @@ dmrg_params = {
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-6,
     'max_sweeps': max_sweep
+    'norm_tol' : 1.0-4
 }
 
 ensure_dir(PATH + "observables/")
