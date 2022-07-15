@@ -39,20 +39,22 @@ os.environ["OMP_NUM_THREADS"] = "68"
 
 L = int(sys.argv[1])
 t = float(sys.argv[2])
-U = float(sys.argv[3])
-mu = float(sys.argv[4])
-Ncut = int(sys.argv[5])
-CHI = int(sys.argv[6])
-RM = sys.argv[7]
-QN = sys.argv[8]
-PATH = sys.argv[9]
-BC_MPS = sys.argv[10]
-BC = sys.argv[11]
-IS = sys.argv[12]
+tp = float(sys.argv[3])
+U = float(sys.argv[4])
+mu = float(sys.argv[5])
+Ncut = int(sys.argv[6])
+CHI = int(sys.argv[7])
+RM = sys.argv[8]
+QN = sys.argv[9]
+PATH = sys.argv[10]
+BC_MPS = sys.argv[11]
+BC = sys.argv[12]
+IS = sys.argv[13]
 
 model_params = {
     "L": L,
     "t": t,
+    "tp": tp,
     "U": U,
     "mu": mu,
     "Ncut": Ncut,
@@ -95,7 +97,7 @@ dmrg_params = {
     },
     # 'chi_list': chi_list,
     'max_E_err': 1.0e-8,
-    'max_S_err': 1.0e-4,
+    'max_S_err': 1.0e-6,
     'max_sweeps': 500
 }
 
@@ -109,6 +111,7 @@ eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
 E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
 
 N = psi.expectation_value("N")
+B = psi.expectation_value("B")
 EE = psi.entanglement_entropy()
 ES = psi.entanglement_spectrum()
 
@@ -154,27 +157,30 @@ else:
 gap = E1 - E
 
 file1 = open( PATH + "observables/energy.txt","a")
-file1.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + repr(gap) + " " + "\n")
+file1.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(B) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + repr(gap) + " " + "\n")
 
 file2 = open( PATH + "observables/numbers.txt","a")
-file2.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
+file2.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
 
 file3 = open( PATH + "observables/exciton_density.txt","a")
-file3.write(repr(t) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, hs)) + " " + "\n")
+file3.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, hs)) + " " + "\n")
 
-file_ES = open( PATH + "entanglement/es_t_%.2f_U_%.2f_mu_%.2f.txt" % (t,U,mu),"a")
+file4 = open( PATH + "observables/condensation.txt","a")
+file4.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, B)) + " " + "\n")
+
+file_ES = open( PATH + "entanglement/es_t_%.2f_tp_%.2f_U_%.2f_mu_%.2f.txt" % (t,tp,U,mu),"a")
 for i in range(0,R):
     file_ES.write("  ".join(map(str, ES[i])) + " " + "\n")
-file_EE = open( PATH + "entanglement/ee_t_%.2f_U_%.2f_mu_%.2f.txt" % (t,U,mu),"a")
+file_EE = open( PATH + "entanglement/ee_t_%.2f_tp_%.2f_U_%.2f_mu_%.2f.txt" % (t,tp,U,mu),"a")
 file_EE.write("  ".join(map(str, EE)) + " " + "\n")
 
-file_STAT = open( PATH + "logs/stat_t_%.2f_U_%.2f_mu_%.2f.txt" % (t,U,mu),"a")
+ file_STAT = open( PATH + "logs/stat_t_%.2f_tp_%.2f_U_%.2f_mu_%.2f.txt" % (t,tp,U,mu),"a")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['E'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['S'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['max_trunc_err'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['norm_err'])) + " " + "\n")
 
-with open( PATH + 'mps/gs_t_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
+with open( PATH + 'mps/gs_t_%.2f_tp_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
     pickle.dump(psi, f)
 
 
