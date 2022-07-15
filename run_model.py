@@ -180,7 +180,7 @@ file_STAT.write("  ".join(map(str,eng.sweep_stats['S'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['max_trunc_err'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['norm_err'])) + " " + "\n")
 
-with open( PATH + 'mps/gs_t_%.2f_tp_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
+with open( PATH + 'mps/gs_t_%.2f_tp_%.2f_U%.2f_mu%.2f.pkl' % (t,tp,U,mu), 'wb') as f:
     pickle.dump(psi, f)
 
 
