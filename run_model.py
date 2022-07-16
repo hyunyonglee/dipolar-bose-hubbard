@@ -78,7 +78,7 @@ if RM == 'random':
 dchi = int(CHI/5)
 chi_list = {}#{10: 32, 20: 64, 30: CHI}
 for i in range(5):
-    chi_list[i*50] = (i+1)*dchi
+    chi_list[i*10] = (i+1)*dchi
 
 if BC_MPS == 'infinite':
     max_sweep = 1000
