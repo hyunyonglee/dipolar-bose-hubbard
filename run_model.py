@@ -88,9 +88,9 @@ else:
 dmrg_params = {
     'mixer': True,  # setting this to True helps to escape local minima
     'mixer_params': {
-        'amplitude': 1.e-5,
+        'amplitude': 1.e-2,
         'decay': 1.2,
-        'disable_after': 150
+        'disable_after': 100
     },
     'trunc_params': {
         'chi_max': CHI,
