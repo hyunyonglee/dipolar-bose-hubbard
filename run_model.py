@@ -70,7 +70,7 @@ product_state = [IS] * M.lat.N_sites
 psi = MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
 
 if RM == 'random':
-    TEBD_params = {'N_steps': 10, 'trunc_params':{'chi_max': 20}, 'verbose': 0}
+    TEBD_params = {'N_steps': 20, 'trunc_params':{'chi_max': 64}, 'verbose': 0}
     eng = tebd.RandomUnitaryEvolution(psi, TEBD_params)
     eng.run()
     psi.canonical_form() 
