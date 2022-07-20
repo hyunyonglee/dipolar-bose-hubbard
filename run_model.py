@@ -35,7 +35,7 @@ conf = {
 }
 logging.config.dictConfig(conf)
 
-os.environ["OMP_NUM_THREADS"] = "68"
+# os.environ["OMP_NUM_THREADS"] = "68"
 
 L = int(sys.argv[1])
 t = float(sys.argv[2])
@@ -66,8 +66,30 @@ model_params = {
 print("\n\n\n%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%")
 M = model.DIPOLAR_BOSE_HUBBARD(model_params)
 
-product_state = [IS] * M.lat.N_sites
+# initial state
+if IS == '1-1p':
+    product_state = ['1'] * M.lat.N_sites
+    product_state[0] = '2'
+
+elif IS == '1-2p':
+    product_state = ['1'] * M.lat.N_sites
+    product_state[0] = '2'
+    product_state[1] = '2'
+    
+elif IS == '1-1h':
+    product_state = ['1'] * M.lat.N_sites
+    product_state[0] = '0'
+    
+elif IS == '1-2h':
+    product_state = ['1'] * M.lat.N_sites
+    product_state[0] = '0'
+    product_state[1] = '0'
+    
+else:
+    product_state = [IS] * M.lat.N_sites
+    
 psi = MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
+
 
 if RM == 'random':
     TEBD_params = {'N_steps': 20, 'trunc_params':{'chi_max': 64}, 'verbose': 0}
@@ -135,36 +157,9 @@ for i in range(0,R):
     hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
 #
 
-# excited state
-if BC_MPS == 'finite':
-    dmrg_params['orthogonal_to'] = [psi]
-    psi1 = psi.copy()  # MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
-    eng1 = dmrg.TwoSiteDMRGEngine(psi1, M, dmrg_params)
-    E1, psi1 = eng1.run()  # equivalent to dmrg.run() up to the return parameters.
-
-    with open( PATH + 'mps/exs_t_%.2f_U%.2f_mu%.2f.pkl' % (t,U,mu), 'wb') as f:
-    	pickle.dump(psi1, f)
-
-else:
-    # resume_psi = eng.get_resume_data(sequential_simulations=True)
-    # M1 = M.extract_segment(enlarge=10)
-    # first, last = M1.lat.segment_first_last
-    
-    # psi_s = psi.extract_segment(first, last)
-    # init_env_data = eng.env.get_initialization_data(first, last)
-
-    # psi1 = psi_s.copy()  # TODO: perturb this a little bit
-    # resume_psi1 = {'init_env_data': init_env_data}
-
-    # eng1 = dmrg.TwoSiteDMRGEngine(psi1, M1, dmrg_params, resume_data=resume_psi1)
-    # E1, psi1 = eng1.run()
-    E1 = E
-
-#
-gap = E1 - E
 
 file1 = open( PATH + "observables/energy.txt","a")
-file1.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(B) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + repr(gap) + " " + "\n")
+file1.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(B) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + "\n")
 
 file2 = open( PATH + "observables/numbers.txt","a")
 file2.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
