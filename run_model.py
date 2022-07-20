@@ -11,6 +11,7 @@ import sys
 import matplotlib.pyplot as plt
 import pickle
 
+tenpy.tools.misc.setup_logging(to_stdout="WARNING") 
 
 def ensure_dir(f):
     d=os.path.dirname(f)
@@ -109,7 +110,8 @@ else:
     max_sweep = 50
 
 dmrg_params = {
-    'mixer': True,  # setting this to True helps to escape local minima
+    # 'mixer': True,  # setting this to True helps to escape local minima
+    'mixer' = dmrg.SubspaceExpansion
     'mixer_params': {
         'amplitude': 1.e-3,
         'decay': 1.2,
