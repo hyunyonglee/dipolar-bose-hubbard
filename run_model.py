@@ -11,6 +11,7 @@ import sys
 import matplotlib.pyplot as plt
 import pickle
 
+
 def ensure_dir(f):
     d=os.path.dirname(f)
     if not os.path.exists(d):
@@ -110,7 +111,7 @@ else:
 dmrg_params = {
     'mixer': True,  # setting this to True helps to escape local minima
     'mixer_params': {
-        'amplitude': 1.e-2,
+        'amplitude': 1.e-3,
         'decay': 1.2,
         'disable_after': 100
     },
@@ -126,8 +127,7 @@ dmrg_params = {
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-6,
     'max_sweeps': max_sweep,
-    'norm_tol' : 1.0e-4,
-    'norm_tol_iter' : 100
+    'combine' : True
 }
 
 ensure_dir(PATH + "observables/")
@@ -137,7 +137,7 @@ ensure_dir(PATH + "mps/")
 
 # ground state
 eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
-E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
+E, psi = eng.run( dmrg.SubspaceExpansion )  # equivalent to dmrg.run() up to the return parameters.
 
 N = psi.expectation_value("N")
 B = np.abs( psi.expectation_value("B") )
