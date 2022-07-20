@@ -97,10 +97,10 @@ if RM == 'random':
     eng.run()
     psi.canonical_form() 
 
-dchi = int(CHI/5)
-chi_list = {}#{10: 32, 20: 64, 30: CHI}
-for i in range(5):
-    chi_list[i*20] = (i+1)*dchi
+# dchi = int(CHI/5)
+# chi_list = {}#{10: 32, 20: 64, 30: CHI}
+# for i in range(5):
+#     chi_list[i*20] = (i+1)*dchi
 
 if BC_MPS == 'infinite':
     max_sweep = 1000
@@ -122,7 +122,7 @@ dmrg_params = {
             'N_min': 5,
             'N_max': 20
     },
-    'chi_list': chi_list,
+    # 'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-6,
     'max_sweeps': max_sweep,
