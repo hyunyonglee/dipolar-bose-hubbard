@@ -69,21 +69,21 @@ M = model.DIPOLAR_BOSE_HUBBARD(model_params)
 # initial state
 if IS == '1-1p':
     product_state = ['1'] * M.lat.N_sites
-    product_state[0] = '2'
+    product_state[int(L/2)] = '2'
 
 elif IS == '1-2p':
     product_state = ['1'] * M.lat.N_sites
-    product_state[0] = '2'
-    product_state[1] = '2'
+    product_state[int(L/2)] = '2'
+    product_state[int(L/2)+1] = '2'
     
 elif IS == '1-1h':
     product_state = ['1'] * M.lat.N_sites
-    product_state[0] = '0'
+    product_state[int(L/2)] = '0'
     
 elif IS == '1-2h':
     product_state = ['1'] * M.lat.N_sites
-    product_state[0] = '0'
-    product_state[1] = '0'
+    product_state[int(L/2)] = '0'
+    product_state[int(L/2)+1] = '0'
     
 else:
     product_state = [IS] * M.lat.N_sites
