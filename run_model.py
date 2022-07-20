@@ -11,8 +11,6 @@ import sys
 import matplotlib.pyplot as plt
 import pickle
 
-tenpy.tools.misc.setup_logging(to_stdout="WARNING") 
-
 def ensure_dir(f):
     d=os.path.dirname(f)
     if not os.path.exists(d):
