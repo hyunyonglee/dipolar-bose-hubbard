@@ -31,7 +31,13 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
         site.multiply_operators(['B','B'])
         site.multiply_operators(['Bd','Bd'])
 
-        lat = Chain( L=L, site=site, bc=bc, bc_MPS=bc_MPS)
+        if bc_MPS == 'finite' && bc == 'periodic':
+            order = 'folded'
+        else:
+            order = 'default'
+        
+        lat = Chain( L=L, site=site, bc=bc, bc_MPS=bc_MPS, order=order )
+
         
         CouplingModel.__init__(self, lat)
 
