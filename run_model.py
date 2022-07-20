@@ -104,8 +104,10 @@ if RM == 'random':
 
 if BC_MPS == 'infinite':
     max_sweep = 1000
+    disable_after = 100
 else:
-    max_sweep = 50
+    max_sweep = 200
+    disable_after = 50
 
 dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
@@ -113,7 +115,7 @@ dmrg_params = {
     'mixer_params': {
         'amplitude': 1.e-3,
         'decay': 1.2,
-        'disable_after': 100
+        'disable_after': 
     },
     'trunc_params': {
         'chi_max': CHI,
