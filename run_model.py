@@ -88,6 +88,14 @@ elif IS == '1-2h':
 elif IS == 'half':
     product_state = ['1','0'] * int(M.lat.N_sites/2)
     
+elif IS == 'half-1p':
+    product_state = ['1','0'] * int(M.lat.N_sites/2)
+    product_state[int(M.lat.N_sites/2)+1] = '1'
+
+elif IS == 'half-1h':
+    product_state = ['1','0'] * int(M.lat.N_sites/2)
+    product_state[int(M.lat.N_sites/2)] = '0'
+    
 else:
     product_state = [IS] * M.lat.N_sites
     
