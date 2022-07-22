@@ -84,6 +84,9 @@ elif IS == '1-2h':
     product_state = ['1'] * M.lat.N_sites
     product_state[int(L/2)] = '0'
     product_state[int(L/2)+1] = '0'
+
+elif IS == 'half':
+    product_state = ['1','0'] * int(M.lat.N_sites/2)
     
 else:
     product_state = [IS] * M.lat.N_sites
