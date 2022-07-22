@@ -167,8 +167,19 @@ else:
 
 # measuring exciton condensation
 hs = []
-for i in range(0,R): 
-    hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
+if BC_MPS == 'finite' and BC == 'periodic':
+    for i in range(0,int(L/2-1)): 
+        I = 2*i
+        hs.append( np.abs( psi.expectation_value_term([('Bd',I+2),('B',I)]) ) )
+    hs.append( np.abs( psi.expectation_value_term([('Bd',L-1),('B',L-2 )]) ) )
+    for i in range(0,int(L/2-1)):
+        I = L-1 - 2*i
+        hs.append( np.abs( psi.expectation_value_term([('Bd',I-2),('B',I)]) ) )
+    hs.append( np.abs( psi.expectation_value_term([('Bd',0),('B',1)]) ) )
+
+else:
+    for i in range(0,R): 
+        hs.append( np.abs( psi.expectation_value_term([('Bd',i+1),('B',i)]) ) )
 #
 
 
