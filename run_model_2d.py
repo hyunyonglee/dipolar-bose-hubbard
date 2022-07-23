@@ -176,12 +176,13 @@ hx = []
 hy = []
 for i in range(0,lx): 
     for j in range(0,Ly):
-        hx.append( np.abs( psi.expectation_value_term([('Bd',i+Ly),('B',i)]) ) )
+        s = i*Lx + j
+        hx.append( np.abs( psi.expectation_value_term([('Bd',s+Ly),('B',s)]) ) )
         if j==(Ly-1): 
             J = -(Ly-1)
         else: 
             J = 1
-        hy.append( np.abs( psi.expectation_value_term([('Bd',i+J),('B',i)]) ) )
+        hy.append( np.abs( psi.expectation_value_term([('Bd',s+J),('B',s)]) ) )
 #
 
 
