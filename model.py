@@ -21,6 +21,7 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
         t = model_params.get('t', 1.)
         tp = model_params.get('tp', 1.)
         U = model_params.get('U', 1.)
+        Ut = model_params.get('Ut', 1.)
         mu = model_params.get('mu', 0.)
         Ncut = model_params.get('Ncut', 2)
         bc_MPS = model_params.get('bc_MPS', 'infinite')
@@ -38,9 +39,10 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
             order = 'default'
         
         lat = Chain( L=L, site=site, bc=bc, bc_MPS=bc_MPS, order=order )
-
-        
         CouplingModel.__init__(self, lat)
+
+        # NN Hubbard Interaction
+        self.add_coupling( Ut, 0, 'N', 0, 'N', [1,0])
 
         # 3-site hopping
         self.add_multi_coupling( -t, [('Bd', 0, 0), ('B B', 1, 0), ('Bd', 2, 0)])
