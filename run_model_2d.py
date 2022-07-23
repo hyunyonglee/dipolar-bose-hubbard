@@ -201,9 +201,6 @@ file4.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(mu) + " " + " 
 file5 = open( PATH + "observables/condensation.txt","a")
 file5.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(mu) + " " + "  ".join(map(str, B)) + " " + "\n")
 
-file_ES = open( PATH + "entanglement/es_t_%.2f_tp_%.2f_U_%.2f_mu_%.2f.txt" % (t,tp,U,mu),"a")
-for i in range(0,R):
-    file_ES.write("  ".join(map(str, ES[i])) + " " + "\n")
 file_EE = open( PATH + "entanglement/ee_t_%.2f_tp_%.2f_U_%.2f_mu_%.2f.txt" % (t,tp,U,mu),"a")
 file_EE.write("  ".join(map(str, EE)) + " " + "\n")
 
