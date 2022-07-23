@@ -42,8 +42,8 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
         CouplingModel.__init__(self, lat)
 
         # NN Hubbard Interaction
-        self.add_coupling( Ut, 0, 'N', 0, 'N', [1,0])
-
+        self.add_coupling( Ut, 0, 'N', 0, 'N', 1)
+        
         # 3-site hopping
         self.add_multi_coupling( -t, [('Bd', 0, 0), ('B B', 1, 0), ('Bd', 2, 0)])
         self.add_multi_coupling( -t, [('B', 0, 0), ('Bd Bd', 1, 0), ('B', 2, 0)])
