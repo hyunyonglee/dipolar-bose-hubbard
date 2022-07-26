@@ -160,7 +160,7 @@ dmrg_params = {
             'N_min': 5,
             'N_max': 20
     },
-    # 'chi_list': chi_list,
+    'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': 1.0e-6,
     'max_sweeps': max_sweep,
