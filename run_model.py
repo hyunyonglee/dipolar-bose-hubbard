@@ -138,7 +138,7 @@ chi_list = {0: 8, 10: 16, 20: 32, 30: CHI}
 #     chi_list[i*20] = (i+1)*dchi
 
 if BC_MPS == 'infinite':
-    max_sweep = 1000
+    max_sweep = 500
     disable_after = 100
 else:
     max_sweep = 200
