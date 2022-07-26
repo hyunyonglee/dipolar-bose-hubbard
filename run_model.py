@@ -98,6 +98,28 @@ elif IS == 'half-1h':
     product_state = ['1','0'] * int(M.lat.N_sites/2)
     product_state[int(M.lat.N_sites/2)] = '0'
 
+elif IS == '0.9':
+    product_state = ['1'] * M.lat.N_sites
+    product_state[0] = '0'
+
+elif IS == '0.8':
+    product_state = ['1'] * M.lat.N_sites
+    product_state[0] = '0'
+    product_state[1] = '0'
+
+elif IS == '0.7':
+    product_state = ['1'] * M.lat.N_sites
+    product_state[0] = '0'
+    product_state[1] = '0'
+    product_state[2] = '0'
+
+elif IS == '0.6':
+    product_state = ['1'] * M.lat.N_sites
+    product_state[0] = '0'
+    product_state[1] = '0'
+    product_state[2] = '0'
+    product_state[3] = '0'
+
 else:
     product_state = [IS] * M.lat.N_sites
     
@@ -126,8 +148,8 @@ dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
     'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
-        'amplitude': 1.e-1,
-        'decay': 1.1,
+        'amplitude': 1.e-2,
+        'decay': 1.2,
         'disable_after': disable_after
     },
     'trunc_params': {
