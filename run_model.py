@@ -148,7 +148,7 @@ dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
     'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
-        'amplitude': 1.e-1,
+        'amplitude': 1.e-2,
         'decay': 1.5,
         'disable_after': disable_after
     },
