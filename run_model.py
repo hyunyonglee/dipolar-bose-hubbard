@@ -142,14 +142,14 @@ if BC_MPS == 'infinite':
     disable_after = 100
 else:
     max_sweep = 1000
-    disable_after = 50
+    disable_after = 100
 
 dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
     'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
-        'amplitude': 1.e-2,
-        'decay': 2.0,
+        'amplitude': 1.e-5,
+        'decay': 1.0,
         'disable_after': disable_after
     },
     'trunc_params': {
