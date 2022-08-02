@@ -151,7 +151,7 @@ dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
     'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
-        'amplitude': 1.e-2,
+        'amplitude': 1.e-3,
         'decay': 1.5,
         'disable_after': disable_after
     },
@@ -159,10 +159,10 @@ dmrg_params = {
         'chi_max': CHI,
         'svd_min': 1.e-9
     },
-    'lanczos_params': {
-            'N_min': 5,
-            'N_max': 20
-    },
+    # 'lanczos_params': {
+    #         'N_min': 5,
+    #         'N_max': 20
+    # },
     'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': S_err,
