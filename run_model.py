@@ -140,11 +140,11 @@ chi_list = {0: 8, 10: 16, 20: 32, 30: CHI}
 if BC_MPS == 'infinite':
     max_sweep = 500
     disable_after = 100
-    S_err = 1.0-6
+    S_err = 1.0e-6
 else:
     max_sweep = 1000
     disable_after = 100
-    S_err = 1.0-8
+    S_err = 1.0e-8
 
 dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
