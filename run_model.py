@@ -118,6 +118,9 @@ elif IS == '0.6':
     product_state[2] = '0'
     product_state[3] = '0'
 
+elif IS == '1.5':
+    product_state = ['1','2'] * int(M.lat.N_sites/2)
+    
 else:
     product_state = [IS] * M.lat.N_sites
     
