@@ -35,8 +35,6 @@ conf = {
 }
 logging.config.dictConfig(conf)
 
-# os.environ["OMP_NUM_THREADS"] = "68"
-
 L = int(sys.argv[1])
 t = float(sys.argv[2])
 tp = float(sys.argv[3])

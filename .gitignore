@@ -3,14 +3,13 @@ DATAs/
 DATAs_CEDAR/
 DATAs_OHTAKA/
 DATAs_NURION/
-Analysis/
-Analysis-finite/
-Analysis-infinite/
+Analysis*/
 entanglement/
 logs/
 mps/
 observables/
 previous/
+Summary/
 
 # Dependency directories
 __pycache__/

@@ -14,7 +14,7 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
     
     def __init__(self, model_params):
         
-        # 0) read out/set default parameters
+        # 0) read out/set default parameters 
         if not isinstance(model_params, Config):
             model_params = Config(model_params, "DIPOLAR_BOSE_HUBBARD")
         L = model_params.get('L', 1)
