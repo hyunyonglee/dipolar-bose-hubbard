@@ -104,6 +104,8 @@ elif any( IS == frac for frac in ['0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8
 elif any( IS == frac for frac in ['1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9'] ):
     product_state = ['1'] * M.lat.N_sites
     for i in range( int(M.lat.N_sites * (float(IS)-1) ) ):
+        print(float(IS)-1)
+        print(i)
         product_state[i] = '2'
     
 elif any( IS == frac for frac in ['2.1','2.2','2.3','2.4','2.5','2.6','2.7','2.8','2.9'] ):
