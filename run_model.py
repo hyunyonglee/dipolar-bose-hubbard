@@ -219,13 +219,13 @@ file3.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + re
 file4 = open( PATH + "observables/condensation.txt","a")
 file4.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, B)) + " " + "\n")
 
-file_ES = open( PATH + "entanglement/es_t_%.2f_tp_%.2f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
+file_ES = open( PATH + "entanglement/es_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
 for i in range(0,R):
     file_ES.write("  ".join(map(str, ES[i])) + " " + "\n")
-file_EE = open( PATH + "entanglement/ee_t_%.2f_tp_%.2f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
+file_EE = open( PATH + "entanglement/ee_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
 file_EE.write("  ".join(map(str, EE)) + " " + "\n")
 
-file_STAT = open( PATH + "logs/stat_t_%.2f_tp_%.2f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
+file_STAT = open( PATH + "logs/stat_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['E'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['S'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['max_trunc_err'])) + " " + "\n")
