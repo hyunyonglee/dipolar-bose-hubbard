@@ -123,18 +123,18 @@ elif any( IS == frac for frac in ['0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8
     n = float(IS)
     dn = 1-(np.ceil(n)-n)
 
-    product_state = [str(int(np.floor(n)))] * L
-    Ls = int(dn*L)
+    product_state = [str(int(np.floor(n)))] * M.lat.N_sites
+    Ls = int(dn*M.lat.N_sites)
 
     a = 0
     I = 0
-    for i in range(L):
+    for i in range(M.lat.N_sites):
 
         s = 4*i
-        if s < L:
+        if s < M.lat.N_sites:
             a = 0    
         else:
-            a = L
+            a = M.lat.N_sites
     
         product_state[s-a] = str(int(product_state[s-a])+1)
         I = I+1
