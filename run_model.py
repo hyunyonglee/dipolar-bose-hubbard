@@ -113,6 +113,9 @@ elif IS == '1-1half-1':
 elif IS == '2-1half':
     product_state = ['3','3','2','2'] * int(M.lat.N_sites/4)
     
+elif IS == '3-1half':
+    product_state = ['4','4','3','3'] * int(M.lat.N_sites/4)
+    
 elif any( IS == frac for frac in ['0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8','0.9'] ):
     product_state = ['0'] * M.lat.N_sites
     for i in range( round(M.lat.N_sites * float(IS) )):
