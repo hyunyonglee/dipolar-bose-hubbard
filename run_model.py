@@ -97,7 +97,8 @@ elif IS == 'half-1h':
     product_state[int(M.lat.N_sites/2)] = '0'
 
 elif IS == '0-1half':
-    product_state = ['1','1','0','0'] * int(M.lat.N_sites/4)
+    # product_state = ['1','1','0','0'] * int(M.lat.N_sites/4)
+    product_state = ['1','0'] * int(M.lat.N_sites/2)
     
 elif IS == '1-1half':
     product_state = ['2','2','1','1'] * int(M.lat.N_sites/4)
@@ -114,7 +115,8 @@ elif IS == '2-1half':
     product_state = ['3','3','2','2'] * int(M.lat.N_sites/4)
     
 elif IS == '3-1half':
-    product_state = ['4','4','3','3'] * int(M.lat.N_sites/4)
+    # product_state = ['4','4','3','3'] * int(M.lat.N_sites/4)
+    product_state = ['4','3'] * int(M.lat.N_sites/2)
     
 elif any( IS == frac for frac in ['0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8','0.9',
     '1.1','1.2','1.3','1.4','1.5','1.6','1.7','1.8','1.9', 
@@ -169,16 +171,16 @@ if BC_MPS == 'infinite':
     disable_after = 50
     S_err = 1.0e-6
 else:
-    max_sweep = 1000
-    disable_after = 50
-    S_err = 1.0e-8
+    max_sweep = 500
+    disable_after = 30
+    S_err = 1.0e-4
 
 dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
     'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
         'amplitude': 1.e-3,
-        'decay': 1.5,
+        'decay': 2.0,
         'disable_after': disable_after
     },
     'trunc_params': {
