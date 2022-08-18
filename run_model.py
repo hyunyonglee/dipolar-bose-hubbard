@@ -132,22 +132,17 @@ elif any( IS == frac for frac in ['0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8
     I = 0
     for i in range(M.lat.N_sites):
 
-        s = 4*i
+        s = 2*i
         if s < M.lat.N_sites:
             a = 0    
         else:
-            a = M.lat.N_sites
+            a = M.lat.N_sites-1
     
         product_state[s-a] = str(int(product_state[s-a])+1)
         I = I+1
         if I==Ls:
             break
 
-        product_state[s-a+1] = str(int(product_state[s-a+1])+1)
-        I = I+1
-        if I==Ls:
-            break
-    
 else:
     product_state = [IS] * M.lat.N_sites
     
