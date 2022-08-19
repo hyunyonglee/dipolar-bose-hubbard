@@ -49,6 +49,7 @@ PATH = sys.argv[11]
 BC_MPS = sys.argv[12]
 BC = sys.argv[13]
 IS = sys.argv[14]
+TOL = float(sys.argv[15])
 
 model_params = {
     "L": L,
@@ -163,11 +164,11 @@ chi_list = {0: 4, 4: 8, 8: 16, 12: 32, 16: 64, 20: CHI}
 if BC_MPS == 'infinite':
     max_sweep = 1000
     disable_after = 50
-    S_err = 1.0e-6
+    S_err = TOL
 else:
     max_sweep = 500
     disable_after = 30
-    S_err = 1.0e-6
+    S_err = TOL
 
 dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
