@@ -167,7 +167,7 @@ if BC_MPS == 'infinite':
 else:
     max_sweep = 500
     disable_after = 30
-    S_err = 1.0e-4
+    S_err = 1.0e-6
 
 dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
