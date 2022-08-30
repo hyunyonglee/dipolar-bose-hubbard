@@ -126,7 +126,7 @@ elif any( IS == frac for frac in ['0.1','0.2','0.3','0.4','0.5','0.6','0.7','0.8
     dn = np.remainder(n,1)
 
     product_state = [str(int(np.floor(n)))] * M.lat.N_sites
-    Ls = int(dn*M.lat.N_sites)
+    Ls = round(dn*M.lat.N_sites)
 
     a = 0
     I = 0
