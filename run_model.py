@@ -50,11 +50,13 @@ BC_MPS = sys.argv[12]
 BC = sys.argv[13]
 IS = sys.argv[14]
 TOL = float(sys.argv[15])
+h = float(sys.argv[16])
 
 model_params = {
     "L": L,
     "t": t,
     "tp": tp,
+    "h": h,
     "U": U,
     "Ut": Ut,
     "mu": mu,
