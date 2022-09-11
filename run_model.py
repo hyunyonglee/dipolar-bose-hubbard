@@ -213,10 +213,15 @@ ES = psi.entanglement_spectrum()
 if BC_MPS == 'finite':
     R = L-1
     xi = 0.
+    I0 = 10
+    R_CORR = L-10
+    
 else:
     R = L
     xi = psi.correlation_length()
-
+    I0 = 0
+    R_CORR = 100
+    
 # measuring exciton condensation
 hs = []
 if BC_MPS == 'finite' and BC == 'periodic':
@@ -235,6 +240,22 @@ else:
 #
 
 
+# measuring correlation functions
+cor_bb = []
+cor_dd = []
+cor_dd_conn = []
+for i in range(R_CORR):
+
+    cor = psi.expectation_value_term([('Bd',I0),('B',I0+1),('B',I0+2+i),('Bd',I0+3+i)])
+    bb1 = psi.expectation_value_term([('Bd',I0),('B',I0+1)])
+    bb2 = psi.expectation_value_term([('B',I0+2+i),('Bd',I0+3+i)])
+    
+    cor_bb.append( np.abs( psi.expectation_value_term([('Bd',I0),('B',I0+1+i)]) ) )
+    cor_dd.append( np.abs( cor ) )
+    cor_dd_conn.append( np.abs( cor - bb1*bb2 ) )
+    
+#
+
 file1 = open( PATH + "observables/energy.txt","a")
 file1.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(B) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + "\n")
 
@@ -249,6 +270,15 @@ file4.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + re
 
 file5 = open( PATH + "observables/entanglement_entropy.txt","a")
 file5.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, EE)) + " " + "\n")
+
+file6 = open( PATH + "observables/corr_bb.txt","a")
+file6.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, cor_bb)) + " " + "\n")
+
+file7 = open( PATH + "observables/corr_dd.txt","a")
+file7.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, cor_dd)) + " " + "\n")
+
+file8 = open( PATH + "observables/corr_dd_conn.txt","a")
+file8.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, cor_dd_conn)) + " " + "\n")
 
 file_ES = open( PATH + "entanglement/es_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
 for i in range(0,R):
