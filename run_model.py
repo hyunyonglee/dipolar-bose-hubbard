@@ -212,8 +212,8 @@ ES = psi.entanglement_spectrum()
 if BC_MPS == 'finite':
     R = L-1
     xi = 0.
-    I0 = 10
-    R_CORR = L-10
+    I0 = int(L/3)
+    R_CORR = int(L/3)
     
 else:
     R = L
