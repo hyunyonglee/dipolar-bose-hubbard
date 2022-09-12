@@ -155,7 +155,7 @@ eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
 E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
 
 dmrg_params['orthogonal_to'] = [psi]
-psi1 = psi.copy()  # MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
+psi1 = MPS.from_product_state(M.lat.mps_sites(), product_state, bc=M.lat.bc_MPS)
 eng1 = dmrg.TwoSiteDMRGEngine(psi1, M, dmrg_params)
 E1, psi1 = eng1.run()  # equivalent to dmrg.run() up to the return parameters.
 
