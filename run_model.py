@@ -51,6 +51,7 @@ BC = sys.argv[13]
 IS = sys.argv[14]
 TOL = float(sys.argv[15])
 h = float(sys.argv[16])
+EXC = sys.argv[17]
 
 model_params = {
     "L": L,
@@ -203,7 +204,6 @@ ensure_dir(PATH + "mps/")
 # ground state
 eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
 E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
-
 N = psi.expectation_value("N")
 B = np.abs( psi.expectation_value("B") )
 EE = psi.entanglement_entropy()
@@ -251,12 +251,28 @@ for i in range(R_CORR):
     
     cor_bb.append( np.abs( psi.expectation_value_term([('Bd',I0),('B',I0+1+i)]) ) )
     cor_dd.append( np.abs( cor ) )
-    cor_dd_conn.append( np.abs( cor - bb1*bb2 ) )
-    
+    cor_dd_conn.append( np.abs( cor - bb1*bb2 ) )   
 #
 
+
+#
+if EXC == 'ON':
+    dmrg_params['orthogonal_to'] = [psi]
+    psi1 = psi.copy()
+    eng1 = dmrg.TwoSiteDMRGEngine(psi1, M, dmrg_params)
+    E1, psi1 = eng1.run()  # equivalent to dmrg.run() up to the return parameters.
+    gap = E1 - E
+
+    with open( PATH + 'mps/exc_t_%.2f_tp_%.2f_U%.2f_Ut%.2f_mu%.2f.pkl' % (t,tp,U,Ut,mu), 'wb') as f:
+        pickle.dump(psi1, f)
+
+else:
+    gap = 0.
+#
+
+
 file1 = open( PATH + "observables/energy.txt","a")
-file1.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(B) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + "\n")
+file1.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(B) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + repr(gap) + " " + "\n")
 
 file2 = open( PATH + "observables/numbers.txt","a")
 file2.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
