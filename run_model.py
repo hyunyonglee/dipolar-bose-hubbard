@@ -122,6 +122,14 @@ elif IS == '1.5-1':
     product_state = ['1','2'] * int(M.lat.N_sites/2)
     product_state[1] = '1'
     
+elif IS == '2+1':
+    product_state = ['2'] * M.lat.N_sites
+    product_state[int(M.lat.N_sites/2)] = '3'
+    
+elif IS == '2-1':
+    product_state = ['2'] * M.lat.N_sites
+    product_state[int(M.lat.N_sites/2)] = '1'
+    
 elif IS == '2-1half':
     product_state = ['3','3','2','2'] * int(M.lat.N_sites/4)
     
