@@ -34,10 +34,11 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
         site.multiply_operators(['Bd','Bd'])
 
         # MPS boundary condition
-        if bc_MPS == 'finite' and bc == 'periodic':
-            order = 'folded'
-        else:
-            order = 'default'
+        # if bc_MPS == 'finite' and bc == 'periodic':
+        #     order = 'folded'
+        # else:
+        
+        order = 'default'
         
         lat = Chain( L=L, site=site, bc=bc, bc_MPS=bc_MPS, order=order )
         CouplingModel.__init__(self, lat)
