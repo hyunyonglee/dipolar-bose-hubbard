@@ -201,15 +201,15 @@ dmrg_params = {
         'chi_max': CHI,
         'svd_min': 1.e-9
     },
-    # 'lanczos_params': {
-    #         'N_min': 5,
-    #         'N_max': 20
-    # },
+    'lanczos_params': {
+            'N_min': 5,
+            'N_max': 20
+    },
     # 'chi_list': chi_list,
-    'max_E_err': 1.0e-6,
+    'max_E_err': 1.0e-7,
     'max_S_err': S_err,
     'max_sweeps': max_sweep,
-    'combine' : True
+    # 'combine' : True
 }
 
 ensure_dir(PATH + "observables/")
