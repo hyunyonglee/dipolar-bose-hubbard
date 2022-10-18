@@ -194,7 +194,7 @@ dmrg_params = {
     'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
         'amplitude': 1.e-2,
-        'decay': 1.0,
+        'decay': 3.0,
         'disable_after': disable_after
     },
     'trunc_params': {
