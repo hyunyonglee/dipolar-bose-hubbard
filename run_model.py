@@ -191,8 +191,7 @@ else:
 
 dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
-    # 'mixer' : dmrg.SubspaceExpansion,
-    'mixer' : dmrg.DensityMatrixMixer,
+    'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
         'amplitude': 1.e-3,
         'decay': 1.2,
