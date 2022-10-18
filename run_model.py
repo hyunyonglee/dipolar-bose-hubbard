@@ -214,8 +214,8 @@ ensure_dir(PATH + "logs/")
 ensure_dir(PATH + "mps/")
 
 # ground state
-# eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
-eng = dmrg.SingleSiteDMRGEngine(psi, M, dmrg_params)
+eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
+# eng = dmrg.SingleSiteDMRGEngine(psi, M, dmrg_params)
 E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
 psi.canonical_form() 
 
