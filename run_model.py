@@ -199,7 +199,7 @@ dmrg_params = {
     },
     'trunc_params': {
         'chi_max': CHI,
-        'svd_min': 1.e-9
+        'svd_min': 1.e-9,
         'degeneracy_tol': 0.1
     },
     # 'chi_list': chi_list,
