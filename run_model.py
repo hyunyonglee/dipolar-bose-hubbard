@@ -62,6 +62,8 @@ model_params = {
     "U": U,
     "Ut": Ut,
     "mu": mu,
+    "l": l,
+    "q": q,
     "Ncut": Ncut,
     "bc_MPS": BC_MPS,
     "bc": BC,
