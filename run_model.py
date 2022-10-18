@@ -182,7 +182,7 @@ if RM == 'random':
 
 if BC_MPS == 'infinite':
     max_sweep = 500
-    disable_after = 30
+    disable_after = 200
     S_err = TOL
 else:
     max_sweep = 500
