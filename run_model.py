@@ -190,8 +190,8 @@ else:
     S_err = TOL
 
 dmrg_params = {
-    # 'mixer': True,  # setting this to True helps to escape local minima
-    'mixer' : dmrg.SubspaceExpansion,
+    'mixer': False,  # setting this to True helps to escape local minima
+    # 'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
         'amplitude': 1.e-2,
         'decay': 2.0,
