@@ -41,17 +41,18 @@ tp = float(sys.argv[3])
 U = float(sys.argv[4])
 Ut = float(sys.argv[5])
 mu = float(sys.argv[6])
-Ncut = int(sys.argv[7])
-CHI = int(sys.argv[8])
-RM = sys.argv[9]
-QN = sys.argv[10]
-PATH = sys.argv[11]
-BC_MPS = sys.argv[12]
-BC = sys.argv[13]
-IS = sys.argv[14]
-TOL = float(sys.argv[15])
-h = float(sys.argv[16])
-EXC = sys.argv[17]
+h = float(sys.argv[7])
+l = float(sys.argv[8])
+q = float(sys.argv[9])
+Ncut = int(sys.argv[10])
+CHI = int(sys.argv[11])
+RM = sys.argv[12]
+QN = sys.argv[13]
+BC_MPS = sys.argv[14]
+BC = sys.argv[15]
+IS = sys.argv[16]
+TOL = float(sys.argv[17])
+EXC = sys.argv[18]
 
 model_params = {
     "L": L,
@@ -199,8 +200,7 @@ dmrg_params = {
     },
     'trunc_params': {
         'chi_max': CHI,
-        'svd_min': 1.e-9,
-        'degeneracy_tol': 0.05
+        'svd_min': 1.e-9
     },
     # 'chi_list': chi_list,
     'max_E_err': 1.0e-7,

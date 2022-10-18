@@ -28,6 +28,8 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
         bc_MPS = model_params.get('bc_MPS', 'infinite')
         bc = model_params.get('bc', 'periodic')
         QN = model_params.get('QN', 'N')
+        l = model_params.get('l', 0.)
+        q = model_params.get('q', 0.)
 
         site = BosonSite( Nmax=Ncut, conserve=QN, filling=0.0 )
         site.multiply_operators(['B','B'])
@@ -62,6 +64,15 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
 
         # Chemical potential
         self.add_onsite( -( mu + U/2. ), 0, 'N')
+
+        # For static correlation
+        if bc_MPS == 'finite':
+
+            P = []
+            for i in range(L):
+                P.append( l * np.cos( i * q ) )
+
+            self.add_onsite( np.asarray(P), 0, 'N')
 
         
         MPOModel.__init__(self, lat, self.calc_H_MPO())
