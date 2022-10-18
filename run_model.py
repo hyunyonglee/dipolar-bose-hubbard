@@ -176,7 +176,7 @@ if RM == 'random':
 
 # dchi = int(CHI/5)
 # chi_list = {0: 8, 10: 16, 20: 32, 30: CHI}
-chi_list = {0: 4, 4: 8, 8: 16, 12: 32, 16: 64, 20: CHI}
+# chi_list = {0: 4, 4: 8, 8: 16, 12: 32, 16: 64, 20: CHI}
 # for i in range(5):
 #     chi_list[i*20] = (i+1)*dchi
 
@@ -205,7 +205,7 @@ dmrg_params = {
     #         'N_min': 5,
     #         'N_max': 20
     # },
-    'chi_list': chi_list,
+    # 'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': S_err,
     'max_sweeps': max_sweep,
