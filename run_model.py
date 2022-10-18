@@ -182,7 +182,7 @@ if RM == 'random':
 
 if BC_MPS == 'infinite':
     max_sweep = 500
-    disable_after = 50
+    disable_after = 100
     S_err = TOL
 else:
     max_sweep = 500
@@ -193,8 +193,8 @@ dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
     'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
-        'amplitude': 1.e-3,
-        'decay': 2.0,
+        'amplitude': 1.e-2,
+        'decay': 1.5,
         'disable_after': disable_after
     },
     'trunc_params': {
