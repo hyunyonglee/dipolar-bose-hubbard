@@ -191,7 +191,8 @@ else:
 
 dmrg_params = {
     # 'mixer': True,  # setting this to True helps to escape local minima
-    'mixer' : dmrg.SubspaceExpansion,
+    # 'mixer' : dmrg.SubspaceExpansion,
+    'mixer' : dmrg.DensityMatrixMixer,
     'mixer_params': {
         'amplitude': 1.e-3,
         'decay': 1.2,
@@ -205,7 +206,7 @@ dmrg_params = {
     'max_E_err': 1.0e-7,
     'max_S_err': S_err,
     'max_sweeps': max_sweep,
-    # 'combine' : True
+    'combine' : True
 }
 
 ensure_dir(PATH + "observables/")
