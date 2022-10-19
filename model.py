@@ -72,6 +72,7 @@ class DIPOLAR_BOSE_HUBBARD(CouplingModel,MPOModel):
             for i in range(L):
                 P.append( l * np.cos( i * q ) )
 
+            print(P)
             self.add_onsite( np.asarray(P), 0, 'N')
 
         
