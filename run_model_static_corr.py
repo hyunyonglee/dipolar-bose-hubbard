@@ -61,7 +61,7 @@ model_params = {
     "q": q,
     "Ncut": Ncut,
     "bc_MPS": 'finite',
-    "bc": 'periodic',
+    "bc": 'open',
     "QN": 'N'
 }
 
