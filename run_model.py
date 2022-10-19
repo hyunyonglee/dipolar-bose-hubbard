@@ -41,18 +41,17 @@ tp = float(sys.argv[3])
 U = float(sys.argv[4])
 Ut = float(sys.argv[5])
 mu = float(sys.argv[6])
-h = float(sys.argv[7])
-l = float(sys.argv[8])
-q = float(sys.argv[9])
-Ncut = int(sys.argv[10])
-CHI = int(sys.argv[11])
-RM = sys.argv[12]
-QN = sys.argv[13]
-BC_MPS = sys.argv[14]
-BC = sys.argv[15]
-IS = sys.argv[16]
-TOL = float(sys.argv[17])
-EXC = sys.argv[18]
+Ncut = int(sys.argv[7])
+CHI = int(sys.argv[8])
+RM = sys.argv[9]
+QN = sys.argv[10]
+PATH = sys.argv[11]
+BC_MPS = sys.argv[12]
+BC = sys.argv[13]
+IS = sys.argv[14]
+TOL = float(sys.argv[15])
+h = float(sys.argv[16])
+EXC = sys.argv[17]
 
 model_params = {
     "L": L,
@@ -62,8 +61,6 @@ model_params = {
     "U": U,
     "Ut": Ut,
     "mu": mu,
-    "l": l,
-    "q": q,
     "Ncut": Ncut,
     "bc_MPS": BC_MPS,
     "bc": BC,
@@ -177,15 +174,11 @@ if RM == 'random':
     eng.run()
     psi.canonical_form() 
 
-# dchi = int(CHI/5)
-# chi_list = {0: 8, 10: 16, 20: 32, 30: CHI}
-chi_list = {0: 4, 4: 8, 8: 16, 12: 32, 16: 64, 20: CHI}
-# for i in range(5):
-#     chi_list[i*20] = (i+1)*dchi
+# chi_list = {0: 4, 4: 8, 8: 16, 12: 32, 16: 64, 20: CHI}
 
 if BC_MPS == 'infinite':
     max_sweep = 500
-    disable_after = 200
+    disable_after = 50
     S_err = TOL
 else:
     max_sweep = 500
@@ -197,40 +190,32 @@ dmrg_params = {
     'mixer' : dmrg.SubspaceExpansion,
     'mixer_params': {
         'amplitude': 1.e-3,
-        'decay': 1.5,
+        'decay': 2.0,
         'disable_after': disable_after
     },
     'trunc_params': {
         'chi_max': CHI,
         'svd_min': 1.e-9
     },
-<<<<<<< HEAD
-    # 'chi_list': chi_list,
-    'max_E_err': 1.0e-7,
-=======
     # 'lanczos_params': {
     #         'N_min': 5,
     #         'N_max': 20
     # },
     'chi_list': chi_list,
     'max_E_err': 1.0e-8,
->>>>>>> parent of 42851cb (revise)
     'max_S_err': S_err,
     'max_sweeps': max_sweep,
     'combine' : True
 }
 
-ensure_dir("observables/")
-ensure_dir("entanglement/")
-ensure_dir("logs/")
-ensure_dir("mps/")
+ensure_dir(PATH + "observables/")
+ensure_dir(PATH + "entanglement/")
+ensure_dir(PATH + "logs/")
+ensure_dir(PATH + "mps/")
 
 # ground state
 eng = dmrg.TwoSiteDMRGEngine(psi, M, dmrg_params)
-# eng = dmrg.SingleSiteDMRGEngine(psi, M, dmrg_params)
 E, psi = eng.run()  # equivalent to dmrg.run() up to the return parameters.
-psi.canonical_form() 
-
 N = psi.expectation_value("N")
 B = np.abs( psi.expectation_value("B") )
 EE = psi.entanglement_entropy()
@@ -290,7 +275,7 @@ if EXC == 'ON':
     E1, psi1 = eng1.run()  # equivalent to dmrg.run() up to the return parameters.
     gap = E1 - E
 
-    with open( 'mps/exc_t_%.2f_tp_%.2f_U%.2f_Ut%.2f_mu%.2f.pkl' % (t,tp,U,Ut,mu), 'wb') as f:
+    with open( PATH + 'mps/exc_t_%.2f_tp_%.2f_U%.2f_Ut%.2f_mu%.2f.pkl' % (t,tp,U,Ut,mu), 'wb') as f:
         pickle.dump(psi1, f)
 
 else:
@@ -298,43 +283,43 @@ else:
 #
 
 
-file1 = open( "observables/energy.txt","a")
+file1 = open( PATH + "observables/energy.txt","a")
 file1.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + repr(E) + " " + repr( np.mean(N) ) + " " + repr( np.mean(B) ) + " " + repr( np.mean(hs) ) + " " + repr(xi) + " " + repr(gap) + " " + "\n")
 
-file2 = open( "observables/numbers.txt","a")
+file2 = open( PATH + "observables/numbers.txt","a")
 file2.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, N)) + " " + "\n")
 
-file3 = open( "observables/exciton_density.txt","a")
+file3 = open( PATH + "observables/exciton_density.txt","a")
 file3.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, hs)) + " " + "\n")
 
-file4 = open( "observables/condensation.txt","a")
+file4 = open( PATH + "observables/condensation.txt","a")
 file4.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, B)) + " " + "\n")
 
-file5 = open( "observables/entanglement_entropy.txt","a")
+file5 = open( PATH + "observables/entanglement_entropy.txt","a")
 file5.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, EE)) + " " + "\n")
 
-file6 = open( "observables/corr_bb.txt","a")
+file6 = open( PATH + "observables/corr_bb.txt","a")
 file6.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, cor_bb)) + " " + "\n")
 
-file7 = open( "observables/corr_dd.txt","a")
+file7 = open( PATH + "observables/corr_dd.txt","a")
 file7.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, cor_dd)) + " " + "\n")
 
-file8 = open( "observables/corr_dd_conn.txt","a")
+file8 = open( PATH + "observables/corr_dd_conn.txt","a")
 file8.write(repr(t) + " " + repr(tp) + " " + repr(U) + " " + repr(Ut) + " " + repr(mu) + " " + "  ".join(map(str, cor_dd_conn)) + " " + "\n")
 
-file_ES = open( "entanglement/es_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
+file_ES = open( PATH + "entanglement/es_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
 for i in range(0,R):
     file_ES.write("  ".join(map(str, ES[i])) + " " + "\n")
-file_EE = open( "entanglement/ee_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
+file_EE = open( PATH + "entanglement/ee_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
 file_EE.write("  ".join(map(str, EE)) + " " + "\n")
 
-file_STAT = open( "logs/stat_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
+file_STAT = open( PATH + "logs/stat_t_%.3f_tp_%.3f_U_%.2f_Ut_%.2f_mu_%.2f.txt" % (t,tp,U,Ut,mu),"a")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['E'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['S'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['max_trunc_err'])) + " " + "\n")
 file_STAT.write("  ".join(map(str,eng.sweep_stats['norm_err'])) + " " + "\n")
 
-with open( 'mps/gs_t_%.2f_tp_%.2f_U%.2f_Ut%.2f_mu%.2f.pkl' % (t,tp,U,Ut,mu), 'wb') as f:
+with open( PATH + 'mps/gs_t_%.2f_tp_%.2f_U%.2f_Ut%.2f_mu%.2f.pkl' % (t,tp,U,Ut,mu), 'wb') as f:
     pickle.dump(psi, f)
 
 
