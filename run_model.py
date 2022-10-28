@@ -178,6 +178,9 @@ if RM == 'random':
     psi.canonical_form() 
 
 # chi_list = {0: 4, 4: 8, 8: 16, 12: 32, 16: 64, 20: CHI}
+dchi = int(CHI/5)
+for i in range(5):
+    chi_list[i*6] = (i+1)*dchi
 
 if BC_MPS == 'infinite':
     max_sweep = 500
@@ -204,7 +207,7 @@ dmrg_params = {
     #         'N_min': 5,
     #         'N_max': 20
     # },
-    # 'chi_list': chi_list,
+    'chi_list': chi_list,
     'max_E_err': 1.0e-8,
     'max_S_err': S_err,
     'max_sweeps': max_sweep,
