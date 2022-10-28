@@ -18,7 +18,7 @@ def ensure_dir(f):
     return d
 
 
-mkl_set_nthreads(24)
+mkl_set_nthreads(64)
 
 import logging.config
 conf = {
