@@ -5,10 +5,10 @@ import model
 from tenpy.networks.mps import MPS
 from tenpy.algorithms import dmrg
 from tenpy.algorithms import tebd
+from tenpy.tools.process import mkl_set_nthreads
 import os
 import os.path
 import sys
-import matplotlib.pyplot as plt
 import pickle
 
 def ensure_dir(f):
@@ -16,6 +16,9 @@ def ensure_dir(f):
     if not os.path.exists(d):
         os.makedirs(d)
     return d
+
+
+mkl_set_nthreads(24)
 
 import logging.config
 conf = {
