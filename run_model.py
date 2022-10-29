@@ -183,7 +183,7 @@ for i in range(5):
     chi_list[i*6+20] = (i+1)*dchi
 
 if BC_MPS == 'infinite':
-    max_sweep = 500
+    max_sweep = 2000
     disable_after = 50
     S_err = TOL
 else:
